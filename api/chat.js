@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     try {
         // Invia la richiesta all'API di Hugging Face per il modello Llama 3
         const response = await fetch(
-            "https://api-inference.huggingface.co/models/meta-llama/Meta-Llama-3-8B-Instruct",
+            "https://api-inference.huggingface.co/models/Nous-Hermes/Hermes-2-Pro-Llama-3-8B",
             {
                 method: "POST",
                 headers: {
