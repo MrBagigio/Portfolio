@@ -220,26 +220,39 @@ export default class AIChatWidget {
         this.#showTypingIndicator();
 
         try {
-            const command = ConversationManager.getContext().isAwaitingResponse
-                ? ConversationManager.handleFollowUp(text)
-                : await parse(text);
+            // --- LOGICA IBRIDA ---
+            // 1. Prima proviamo a vedere se è un comando locale che conosciamo
+            const localCommand = await parse(text);
 
-            if (!command || command.intent === 'unknown') {
-                await new Promise(r => setTimeout(r, 500));
-                const msg = 'Non ho capito. Posso eseguire comandi come "apri progetto", "imposta cursore" o "vai a...".';
-                this.#addAIMessage(personaReply(msg, CONFIG.defaultTone));
-                return;
+            if (localCommand && localCommand.intent !== 'unknown') {
+                // È un comando locale! Eseguilo velocemente e gratis.
+                console.log("[Glitchy] Comando locale riconosciuto:", localCommand.intent);
+                const res = await this.#executeCommandSafely(localCommand);
+                await new Promise(r => setTimeout(r, 300)); // Simula pensiero
+                this.#addAIMessage(personaReply(res.msg, CONFIG.defaultTone), res.options || {});
+            } else {
+                // 2. Non è un comando locale. È una domanda aperta. Chiamiamo l'LLM!
+                console.log("[Glitchy] Comando non riconosciuto. Chiamo il backend...");
+                
+                // Chiamata al nostro "ponte API" su Vercel
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+
+                if (!response.ok) {
+                    const errData = await response.json();
+                    throw new Error(errData.error || 'La risposta dal server non è valida.');
+                }
+                
+                const data = await response.json();
+                this.#addAIMessage(data.reply); // Mostra la risposta generata da Llama
             }
 
-            const res = await this.#executeCommandSafely(command);
-            await new Promise(r => setTimeout(r, Math.min(400 + (res.msg.length * CONFIG.typingMsPerChar), 1500)));
-            
-            const personalizedResponse = this.brain.generatePersonalizedResponse(res.msg, text, command.intent);
-            this.#addAIMessage(personalizedResponse, res.options || {});
-
         } catch (err) {
-            console.error(`[${CONFIG.name}] Error during #handleSend:`, err);
-            this.#addAIMessage("Oops, qualcosa è andato storto nel mio cervello artificiale.");
+            console.error(`[Glitchy] Errore durante #handleSend:`, err);
+            this.#addAIMessage("Oops, [bzt..] c'è stato un corto circuito nel mio cervello principale.");
         } finally {
             this.#hideTypingIndicator();
         }
