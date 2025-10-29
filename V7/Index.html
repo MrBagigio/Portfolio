@@ -97,15 +97,26 @@
     </nav>
 
     <main id="main-content" class="page-view active">
-            <section id="hero"><canvas id="hero-background-canvas" class="canvas-decorative"></canvas><div class="hero-content reveal interactive-bounce"><h1 class="glitch" data-text="CREATIVE 3D DEVELOPMENT.">CREATIVE 3D DEVELOPMENT.</h1><p>Sono Alessandro Giacobbi!!! un 3D Artist. Esplora il mio portfolio per scoprire il processo dietro ogni creazione.</p></div><div class="scroll-down"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" /></svg></div></section>
-            
-            <section id="projects"><div class="container">
-                <!-- MODIFICA QUI -->
+        <section id="hero">
+            <canvas id="hero-background-canvas" class="canvas-decorative"></canvas>
+            <div class="hero-content reveal interactive-bounce">
+                <h1 class="glitch" data-text="CREATIVE 3D DEVELOPMENT.">CREATIVE 3D DEVELOPMENT.</h1>
+                <p>Sono Alessandro Giacobbi, un 3D Artist. Esplora il mio portfolio per scoprire il processo dietro ogni creazione.</p>
+            </div>
+            <div class="scroll-down">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" /></svg>
+            </div>
+        </section>
+        
+        <section id="projects">
+            <div class="container">
                 <h2 class="reveal title-3d interactive-bounce">Galleria Interattiva</h2>
                 <div class="project-grid interactive-bounce magnetic-target"></div>
-            </div></section>
-            
-            <section id="about"><div class="container">
+            </div>
+        </section>
+        
+        <section id="about">
+            <div class="container">
                 <h2 class="reveal title-3d interactive-bounce">PROFILO OPERATORE</h2>
                 <div class="about-grid">
                     <div class="about-image reveal interactive-bounce magnetic-target">
@@ -121,31 +132,52 @@
                         </dl>
                     </div>
                 </div>
-            </section>
-            
-            <section id="contact"><div class="container"><div class="contact-grid"><div class="contact-info reveal">
-                <h2 class="interactive-bounce">Contattami</h2>
-                <p class="email-link-container"><a href="mailto:alessandro.giacobbi.3d@gmail.com" class="magnetic-target page-link interactive-bounce">La Mia EMAIL</a></p>
-            </div><div class="contact-form reveal"><h3>Il mio Toolkit</h3><dl class="toolkit-list">
-                <dt>Modellazione & Sculpting:</dt>
-                <dd>
-                    <span class="toolkit-item interactive-bounce magnetic-target" data-software="maya">Maya</span>, 
-                    <span class="toolkit-item interactive-bounce magnetic-target" data-software="zbrush">ZBrush</span>, 
-                    <span class="toolkit-item interactive-bounce magnetic-target" data-software="blender">Blender</span>
-                </dd>
-                <dt>Texturing & Shading:</dt>
-                <dd>
-                    <span class="toolkit-item interactive-bounce magnetic-target" data-software="substance">Substance Painter</span>
-                </dd>
-            </dl></div></div></div></section>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info reveal">
+                        <h2 class="interactive-bounce">Contattami</h2>
+                        <p class="email-link-container"><a href="mailto:alessandro.giacobbi.3d@gmail.com" class="magnetic-target page-link interactive-bounce">La Mia EMAIL</a></p>
+                    </div>
+                    <div class="contact-form reveal">
+                        <h3>Il mio Toolkit</h3>
+                        <dl class="toolkit-list">
+                            <dt>Modellazione & Sculpting:</dt>
+                            <dd>
+                                <span class="toolkit-item interactive-bounce magnetic-target" data-software="maya">Maya</span>, 
+                                <span class="toolkit-item interactive-bounce magnetic-target" data-software="zbrush">ZBrush</span>, 
+                                <span class="toolkit-item interactive-bounce magnetic-target" data-software="blender">Blender</span>
+                            </dd>
+                            <dt>Texturing & Shading:</dt>
+                            <dd>
+                                <span class="toolkit-item interactive-bounce magnetic-target" data-software="substance">Substance Painter</span>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div id="case-history-view" class="page-view">
+            <div class="case-history-container">
+                <header><a href="#" id="close-case-history" class="magnetic-target">&larr; <span>Chiudi</span></a></header>
+                <div class="case-history-header">
+                    <h1 id="case-history-title"></h1>
+                    <p id="case-history-subtitle"></p>
+                </div>
+                <article id="case-history-content"></article>
+            </div>
         </div>
-                <div id="case-history-view" class="page-view"><div class="case-history-container"><header><a href="#" id="close-case-history" class="magnetic-target">&larr; <span>Chiudi</span></a></header><div class="case-history-header"><h1 id="case-history-title"></h1><p id="case-history-subtitle"></p></div><article id="case-history-content"></article></div></div>
     </main>
     
+    <!-- Librerie Esterne -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/EaselPlugin.min.js"></script>
+    
+    <!-- Script Principale dell'Applicazione -->
     <script type="module" src="assets/js/main.js"></script>
-    <script type="module" src="assets/js/modules/title3d-init.js"></script>
-    <!-- AIChatWidget is imported by App.js (via main.js). Removed the direct <script> include to avoid duplicate loading and to fix module load errors. -->
 </body>
 </html>
