@@ -1,0 +1,72 @@
+/* assets/css/modules/base.css */
+
+:root {
+    --background-color: #0D1117;
+    --text-color: #c9d1d9;
+    --text-color-muted: #8b949e;
+    --primary-color: #ffffff;
+    --accent-color: #39ff14;
+    --border-color: rgba(255, 255, 255, 0.1);
+}
+
+* { 
+    box-sizing: border-box; 
+}
+
+html { 
+    scroll-behavior: smooth; 
+}
+
+body {
+    /* Rendi lo sfondo del body trasparente per mostrare il canvas dietro */
+    background-color: transparent;
+
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* --- MODIFICA CHIAVE: Aggiunta regola per disabilitare la selezione del testo --- */
+/* Questa classe viene aggiunta al body da AsteroidsCursor.js e PacmanCursor.js */
+body.js-cursor-active {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+#global-background-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+h1, h2, h3 { 
+    font-family: 'Inter', sans-serif; 
+    color: var(--primary-color); 
+    font-weight: 900; 
+    letter-spacing: -2px; 
+    margin: 0; 
+}
+
+h1 { 
+    font-size: clamp(3rem, 8vw, 6rem); 
+    text-align: center; 
+}
+
+h2 { 
+    font-size: 3.5rem; 
+    text-align: center; 
+    margin-bottom: 90px; 
+}
+
+p { 
+    line-height: 1.7; 
+    color: var(--text-color-muted); 
+    font-size: 1.1rem; 
+}
