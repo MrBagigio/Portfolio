@@ -1,0 +1,101 @@
+/* ==========================================================================
+   COMPONENTS: Stili per Elementi UI Riutilizzabili Minori
+   ========================================================================== */
+
+/* --- 1. Transizioni di Pagina --- */
+#transition-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 20000;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* --- 2. Immagine della Sezione "About" --- */
+.about-image {
+    perspective: 1000px;
+    position: relative;
+    z-index: 2;
+}
+
+.about-image img,
+.about-image canvas {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+/* --- 3. Link Email nella Sezione Contatti --- */
+.email-link-container a {
+    color: var(--primary-color);
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+    padding: 10px;
+    margin-left: -10px;
+}
+
+/* --- 4. Toolkit List (Stili di Base) --- */
+.toolkit-list dt {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-top: 20px;
+}
+
+.toolkit-list dd {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    margin: 5px 0 0 0;
+}
+
+.toolkit-item {
+    position: relative;
+    padding: 5px 8px;
+    cursor: default;
+    user-select: none;
+    z-index: 1;
+}
+
+.toolkit-item::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0;
+    z-index: -1;
+    filter: invert(1) brightness(0.5) grayscale(1);
+}
+
+/* Associazione delle immagini (le transizioni :hover sono in interactions.css) */
+.toolkit-item[data-software="blender"]::before { background-image: url('../img/toolkit/blender-logo.svg'); }
+.toolkit-item[data-software="zbrush"]::before { background-image: url('../img/toolkit/zbrush-logo.svg'); }
+.toolkit-item[data-software="maya"]::before { background-image: url('../img/toolkit/maya-logo.svg'); }
+.toolkit-item[data-software="substance"]::before { background-image: url('../img/toolkit/substance-logo.svg'); }
