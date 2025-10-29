@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Sintassi</title>
+</head>
+<body>
+    <h1>Testando sintassi JavaScript</h1>
+    <script type="module">
+        try {
+            // Test import
+            console.log('Test avviato...');
+        } catch (error) {
+            console.error('Errore:', error);
+            document.body.innerHTML += '<p style="color:red">Errore JavaScript: ' + error.message + '</p>';
+        }
+    </script>
+</body>
+</html>

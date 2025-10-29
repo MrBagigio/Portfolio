@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alessandro Giacobbi - A.P.I.S.</title>
+    <meta name="description" content="Portfolio di Alessandro Giacobbi, un 3D Artist specializzato in environment e character design.">
+    <meta property="og:title" content="Alessandro Giacobbi - A.P.I.S.">
+    <meta property="og:description" content="Portfolio di un 3D Artist specializzato in environment e character design.">
+    <meta property="og:image" content="assets/img/social-preview.jpg">
+    <meta property="og:url" content="https://your-domain.com">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/modules/navbar.css">
+    <link rel="stylesheet" href="assets/css/modules/chatbot.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.142.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.142.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body class="is-loading">
+
+    <canvas id="global-background-canvas" class="canvas-decorative"></canvas>
+    <canvas id="navbar-3d-canvas" class="canvas-navbar"></canvas>
+
+    <audio id="coin-audio" src="assets/audio/coin-insert.mp3" preload="auto"></audio>
+    <audio id="transition-audio" src="assets/audio/vhs-static-sound.mp3" preload="auto"></audio>
+    <audio id="preloader-hover-sound" src="assets/audio/preloader-hover.mp3" preload="auto"></audio>
+    <audio id="preloader-click-sound" src="assets/audio/preloader-click.mp3" preload="auto"></audio>
+    <audio id="preloader-shutdown-sound" src="assets/audio/preloader-shutdown.mp3" preload="auto"></audio>
+    
+    <div id="global-score"></div>
+    <div id="terminal-cursor"></div>
+    <div id="terminal-aura"></div>
+    
+    <canvas id="pacman-cursor-canvas" class="canvas-cursor"></canvas>
+    <canvas id="asteroids-cursor-canvas" class="canvas-cursor"></canvas>
+    <canvas id="transition-canvas" class="canvas-overlay"></canvas>
+    
+    <div id="page-transition-overlay"></div>
+
+    <div id="preloader"><div id="preloader-3d-scene"></div></div>
+
+    <nav id="chimera-navbar" class="main-header is-booting interactive-bounce">
+        <div class="navbar-left">
+            <div class="brand-area">
+                <div class="brand-line">
+                    <a href="#hero" id="nav-link-HOME" class="navbar-brand nav-link" data-command-name="HOME" data-text="A.P.I.S. TERMINAL v4.0">A.P.I.S. TERMINAL v4.0</a>
+                    <div id="analysis-console" class="log-console analysis-log"></div>
+                </div>
+                <div class="command-console-container">
+                    <div id="interactive-console">
+                        <span class="prompt">></span>
+                        <input type="text" id="interactive-input" class="interactive-input" spellcheck="false" autocomplete="off" placeholder="AWAITING INPUT...">
+                        <span class="cursor"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navbar-center">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#projects" id="nav-link-PROGETTI" class="nav-link magnetic-target" data-command-name="PROGETTI"><span>PROGETTI</span></a></li>
+                <li class="nav-item"><a href="#about" id="nav-link-PROFILO" class="nav-link magnetic-target" data-command-name="PROFILO"><span>PROFILO</span></a></li>
+                <li class="nav-item"><a href="#contact" id="nav-link-CONTATTI" class="nav-link magnetic-target" data-command-name="CONTATTI"><span>CONTATTI</span></a></li>
+                <li class="nav-item"><a href="#shop" id="nav-link-SHOP" class="nav-link magnetic-target" data-command-name="SHOP"><span>SHOP</span></a></li>
+            </ul>
+        </div>
+
+        <div class="navbar-right">
+            <div id="arcade-display-panel" class="arcade-display-panel">
+                <div id="high-score-display" class="system-display">HI-SCORE: <span>000000</span></div>
+                <div id="credits-display" class="system-display">CREDITS: <span>0</span></div>
+            </div>
+            <div class="display-with-led">
+                <span class="led led-hdd"></span>
+                <div id="system-log-container" class="log-console system-log">
+                    <div class="log-column">
+                        <div id="log-cpu">CPU: [..........] 0%</div>
+                        <div id="log-mem">MEM: [..........] 0%</div>
+                    </div>
+                    <div class="log-column">
+                        <div id="log-gpu">GPU: [..........] 0%</div>
+                        <div id="log-net">NET: [..........] 0ms</div>
+                    </div>
+                </div>
+            </div>
+            <div class="system-clock" id="system-clock">UPTIME: 00:00:00</div>
+        </div>
+    </nav>
+
+    <main id="main-content" class="page-view active">
+            <section id="hero"><canvas id="hero-background-canvas" class="canvas-decorative"></canvas><div class="hero-content reveal interactive-bounce"><h1 class="glitch" data-text="CREATIVE 3D DEVELOPMENT.">CREATIVE 3D DEVELOPMENT.</h1><p>Sono Alessandro Giacobbi, un 3D Artist. Esplora il mio portfolio per scoprire il processo dietro ogni creazione.</p></div><div class="scroll-down"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" /></svg></div></section>
+            
+            <section id="projects"><div class="container">
+                <!-- MODIFICA QUI -->
+                <h2 class="reveal title-3d interactive-bounce">Galleria Interattiva</h2>
+                <div class="project-grid interactive-bounce magnetic-target"></div>
+            </div></section>
+            
+            <section id="about"><div class="container">
+                <h2 class="reveal title-3d interactive-bounce">PROFILO OPERATORE</h2>
+                <div class="about-grid">
+                    <div class="about-image reveal interactive-bounce magnetic-target">
+                        <canvas id="profile-picture-canvas"></canvas>
+                        <div class="image-prompt">[ CLICCA PER ANALISI GLITCH ]</div>
+                    </div>
+                    <div class="about-text">
+                        <dl class="dossier-list">
+                            <div class="dossier-item interactive-bounce"><dt>ID_OPERATORE:</dt><dd>ALESSANDRO GIACOBBI</dd></div>
+                            <div class="dossier-item interactive-bounce"><dt>STATUS:</dt><dd>ATTIVO</dd></div>
+                            <div class="dossier-item interactive-bounce"><dt>SPECIALIZZAZIONE:</dt><dd>3D Environment, Character Design</dd></div>
+                            <div class="dossier-item dossier-bio interactive-bounce"><dt>BIO:</dt><dd>La mia passione per il 3D nasce dalla volontà di creare mondi e storie immersive. Ogni progetto è un'esplorazione, una sfida tecnica e un'opportunità per dare vita a qualcosa di unico.</dd></div>
+                        </dl>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="contact"><div class="container"><div class="contact-grid"><div class="contact-info reveal">
+                <h2 class="interactive-bounce">Contattami</h2>
+                <p class="email-link-container"><a href="mailto:alessandro.giacobbi.3d@gmail.com" class="magnetic-target page-link interactive-bounce">La Mia EMAIL</a></p>
+            </div><div class="contact-form reveal"><h3>Il mio Toolkit</h3><dl class="toolkit-list">
+                <dt>Modellazione & Sculpting:</dt>
+                <dd>
+                    <span class="toolkit-item interactive-bounce magnetic-target" data-software="maya">Maya</span>, 
+                    <span class="toolkit-item interactive-bounce magnetic-target" data-software="zbrush">ZBrush</span>, 
+                    <span class="toolkit-item interactive-bounce magnetic-target" data-software="blender">Blender</span>
+                </dd>
+                <dt>Texturing & Shading:</dt>
+                <dd>
+                    <span class="toolkit-item interactive-bounce magnetic-target" data-software="substance">Substance Painter</span>
+                </dd>
+            </dl></div></div></div></section>
+        </div>
+                <div id="case-history-view" class="page-view"><div class="case-history-container"><header><a href="#" id="close-case-history" class="magnetic-target">&larr; <span>Chiudi</span></a></header><div class="case-history-header"><h1 id="case-history-title"></h1><p id="case-history-subtitle"></p></div><article id="case-history-content"></article></div></div>
+    </main>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/EaselPlugin.min.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/modules/title3d-init.js"></script>
+    <!-- AIChatWidget is imported by App.js (via main.js). Removed the direct <script> include to avoid duplicate loading and to fix module load errors. -->
+</body>
+</html>
