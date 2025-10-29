@@ -1,4 +1,0 @@
-// assets/js/modules/cursors/pacman/utils.js
-export function debounce(func, delay) { let timeout; return (...args) => { clearTimeout(timeout); timeout = setTimeout(() => func.apply(this, args), delay); }; }
-export function shuffleArray(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } return array; }
-export function isIntersectingLine(p1, p2, circle, radius) { const dx = p2.x - p1.x; const dy = p2.y - p1.y; const lenSq = dx * dx + dy * dy; if (lenSq === 0) return false; const t = Math.max(0, Math.min(1, ((circle.x - p1.x) * dx + (circle.y - p1.y) * dy) / lenSq)); const closestX = p1.x + t * dx; const closestY = p1.y + t * dy; const distSq = (circle.x - closestX) ** 2 + (circle.y - closestY) ** 2; return distSq < radius * radius; }
