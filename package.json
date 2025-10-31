@@ -54,7 +54,3 @@
     "three": "^0.180.0"
   }
 }
-
-{
-  "outputDirectory": "dist"
-}
