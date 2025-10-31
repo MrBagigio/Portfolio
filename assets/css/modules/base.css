@@ -2,6 +2,7 @@
 
 :root {
     --background-color: #0D1117;
+    --background-color-light: #161B22;
     --text-color: #c9d1d9;
     --text-color-muted: #8b949e;
     --primary-color: #ffffff;
@@ -69,4 +70,15 @@ p {
     line-height: 1.7; 
     color: var(--text-color-muted); 
     font-size: 1.1rem; 
+}
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 60px;
+    }
+
+    p {
+        font-size: 1rem;
+    }
 }

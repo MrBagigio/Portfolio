@@ -26,6 +26,19 @@ body.custom-cursor-active button {
     cursor: none;
 }
 
+/* Hide cursor on mobile devices */
+@media (max-width: 767px) {
+    #asteroids-cursor-canvas {
+        display: none !important;
+    }
+    
+    body.custom-cursor-active,
+    body.custom-cursor-active a,
+    body.custom-cursor-active button {
+        cursor: auto;
+    }
+}
+
 #global-score {
     position: fixed;
     top: 25px;

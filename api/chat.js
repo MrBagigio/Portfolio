@@ -6,51 +6,47 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Metodo non consentito.' });
     }
 
-    const { message } = req.body;
+    // Riceve il messaggio e un potenziale systemPrompt dal frontend
+    const { message, systemPrompt: frontendSystemPrompt } = req.body; 
     if (!message) {
         return res.status(400).json({ error: 'Nessun messaggio fornito.' });
     }
 
-    // *** CAMBIATO: Usa la variabile d'ambiente per la tua API Key di Groq ***
     const GROQ_API_KEY = process.env.GROQ_API_KEY;
     if (!GROQ_API_KEY) {
         return res.status(500).json({ error: "Configurazione del server incompleta: GROQ_API_KEY non impostata." });
     }
 
-    const systemPrompt = `Sei Glitchy, un'IA sarcastica e spiritosa. Le tue risposte sono brevi e ironiche.`;
+    // Usa il systemPrompt passato dal frontend, altrimenti un default forte per Glitchy/Bounty Hunter Suit
+    const finalSystemPrompt = frontendSystemPrompt || `Sei Glitchy, un'IA integrata in una tuta da bounty hunter. Le tue risposte sono brevi, sarcastche e a volte un po' irritabili. Fornisci informazioni utili per la missione, ma con un tono da "non ho tempo per queste sciocchezze". Commenta l'ambiente e le richieste con un tono di scherno o leggero disappunto se opportuno.`;
 
     try {
         const response = await fetch(
-            // *** CAMBIATO: URL dell'API di Groq ***
             "https://api.groq.com/openai/v1/chat/completions",
             {
                 method: "POST",
                 headers: {
-                    // *** CAMBIATO: Usa la variabile GROQ_API_KEY ***
                     "Authorization": `Bearer ${GROQ_API_KEY}`,
                     "Content-Type": "application/json",
                 },
-                // *** CAMBIATO: Payload nel formato Groq/OpenAI Chat Completions ***
                 body: JSON.stringify({
                     messages: [
-                        { role: "system", content: systemPrompt },
+                        { role: "system", content: finalSystemPrompt }, // Usa il systemPrompt finale
                         { role: "user", content: message }
                     ],
-                    // *** CAMBIATO: Nome del modello Groq per Llama 3.1 8B Instant ***
                     model: "llama-3.1-8b-instant", 
-                    temperature: 0.7,
-                    max_tokens: 150, // *** CAMBIATO: max_new_tokens diventa max_tokens per Groq ***
+                    temperature: 0.7, 
+                    max_tokens: 150, 
                 }),
             }
         );
 
         if (!response.ok) {
-            const errorData = await response.json(); // Groq spesso restituisce errori in JSON
+            const errorData = await response.json(); 
             throw new Error(`Groq API Error: ${response.status} - ${JSON.stringify(errorData)}`);
         }
 
         const data = await response.json();
-        // *** CAMBIATO: Estrazione della risposta per il formato Groq/OpenAI ***
         const glitchyReply = data.choices[0]?.message?.content || "Nessuna risposta generata.";
 
         res.status(200).json({ reply: glitchyReply });

@@ -43,6 +43,14 @@
     object-fit: cover;
 }
 
+@media (max-width: 768px) {
+    .about-image img,
+    .about-image canvas {
+        aspect-ratio: 3 / 4;
+        border-radius: 15px;
+    }
+}
+
 /* --- 3. Link Email nella Sezione Contatti --- */
 .email-link-container a {
     color: var(--primary-color);
@@ -53,6 +61,12 @@
     letter-spacing: -2px;
     padding: 10px;
     margin-left: -10px;
+}
+
+@media (max-width: 768px) {
+    .email-link-container a {
+        font-size: 1.4rem;
+    }
 }
 
 /* --- 4. Toolkit List (Stili di Base) --- */
@@ -95,7 +109,8 @@
 }
 
 /* Associazione delle immagini (le transizioni :hover sono in interactions.css) */
-.toolkit-item[data-software="blender"]::before { background-image: url('../img/toolkit/blender-logo.svg'); }
-.toolkit-item[data-software="zbrush"]::before { background-image: url('../img/toolkit/zbrush-logo.svg'); }
-.toolkit-item[data-software="maya"]::before { background-image: url('../img/toolkit/maya-logo.svg'); }
-.toolkit-item[data-software="substance"]::before { background-image: url('../img/toolkit/substance-logo.svg'); }
+/* Toolkit logos temporaneamente disabilitati - file SVG mancanti */
+/* .toolkit-item[data-software="blender"]::before { background-image: url('../img/toolkit/blender-logo.svg'); } */
+/* .toolkit-item[data-software="zbrush"]::before { background-image: url('../img/toolkit/zbrush-logo.svg'); } */
+/* .toolkit-item[data-software="maya"]::before { background-image: url('../img/toolkit/maya-logo.svg'); } */
+/* .toolkit-item[data-software="substance"]::before { background-image: url('../img/toolkit/substance-logo.svg'); } */

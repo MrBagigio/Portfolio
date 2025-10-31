@@ -7,6 +7,17 @@ html, body, a, button {
     cursor: none;
 }
 
+/* Hide cursor on mobile devices */
+@media (max-width: 767px) {
+    html, body, a, button {
+        cursor: auto;
+    }
+    
+    #terminal-cursor, #terminal-aura {
+        display: none !important;
+    }
+}
+
 #terminal-cursor, #terminal-aura {
     display: block; /* Sempre block, l'opacità controlla la visibilità */
     position: fixed;

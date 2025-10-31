@@ -32,3 +32,16 @@ body.js-pacman-cursor-active a,
 body.js-pacman-cursor-active button {
     cursor: none;
 }
+
+/* Hide cursor on mobile devices */
+@media (max-width: 767px) {
+    #pacman-cursor-canvas {
+        display: none !important;
+    }
+    
+    body.js-pacman-cursor-active,
+    body.js-pacman-cursor-active a,
+    body.js-pacman-cursor-active button {
+        cursor: auto;
+    }
+}

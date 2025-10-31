@@ -1,0 +1,56 @@
+{
+  "name": "portfolio-v8",
+  "version": "4.0.0",
+  "description": "Portfolio interattivo futuristico con AI Glitchy",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "build": "webpack --mode=production",
+    "build:dev": "webpack --mode=development",
+    "analyze": "webpack --mode=production --analyze",
+    "start": "serve . -p 8000",
+    "dev": "serve . -p 8000"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "babel-jest": "^30.2.0",
+    "babel-loader": "^10.0.0",
+    "html-webpack-plugin": "^5.6.4",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "serve": "^14.2.5",
+    "webpack": "^5.102.1",
+    "webpack-bundle-analyzer": "^4.10.2",
+    "webpack-cli": "^6.0.1"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/src/**/tests/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/*.test.js",
+      "!src/**/*.spec.js"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
+  },
+  "keywords": [
+    "portfolio",
+    "3d",
+    "ai",
+    "webgl"
+  ],
+  "author": "Alessandro Giacobbi",
+  "license": "MIT",
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "three": "^0.180.0"
+  }
+}

@@ -2,10 +2,10 @@
   {
     "id": "biosphaera",
     "title": "Biosphaera",
-    "poster": "assets/projects_assets/Biosphaera/poster.jpg",
+    "poster": "",
     "videos": {
-      "before": { "mp4": "assets/projects_assets/Biosphaera/video_before.mp4" },
-      "after": { "mp4": "assets/projects_assets/Biosphaera/video_after.mp4" }
+      "before": { "mp4": "" },
+      "after": { "mp4": "" }
     },
     "fileSize": "142 MB",
     "date": "24.07.2023",

@@ -27,10 +27,10 @@
 /* 5. Moduli Specifici: Cursori custom */
 @import url("modules/asteroids-cursor.css");
 @import url("modules/pacman-cursor.css");
-@import url("modules/terminal-cursor.css"); 
-@import url("modules/tutorial-terminal.css"); 
-
-/* ==========================================================================
+@import url("modules/simple-cursor.css");
+@import url("modules/glitch-cursor.css");
+@import url("modules/terminal-cursor.css");
+@import url("modules/tutorial-terminal.css");/* ==========================================================================
    PIRAMIDE Z-INDEX GLOBALE (SOLUZIONE DEFINITIVA)
    ========================================================================== */
 
@@ -247,7 +247,14 @@ body.custom-cursor-active * {
                 outline-offset 0.2s ease-out;
 }
 
-/* --- NASCONDI ELEMENTI HERO DURANTE IL CARICAMENTO --- */
+/* Nasconde i cursori custom durante il caricamento per evitare interferenze con il preloader */
+body.is-loading #asteroids-cursor-canvas,
+body.is-loading #pacman-cursor-canvas,
+body.is-loading #glitch-cursor-canvas,
+body.is-loading #simple-cursor-canvas,
+body.is-loading #terminal-cursor-canvas {
+    display: none !important;
+}
 
 /*
   Impedisce che il contenuto della home (testi/arrow) appaia prima che il preloader copra lo schermo.

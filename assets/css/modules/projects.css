@@ -29,7 +29,7 @@
     flex-direction: column;
     color: var(--text-color);
     border: 1px solid var(--border-color);
-    background-color: #0f0f0f;
+    background-color: var(--background-color);
     transition: background-color 0.35s ease, border-color 0.35s ease;
     position: relative;
     overflow: visible;
@@ -44,7 +44,7 @@
 
 .project-card:hover .card-inner,
 .project-card.is-hovered .card-inner {
-    background-color: #171717;
+    background-color: var(--background-color-light);
     border-color: var(--primary-color);
 }
 
@@ -216,12 +216,12 @@
 }
 
 .slider-arrow::before {
-    border-right: 5px solid #000;
+    border-right: 5px solid var(--background-color);
     margin-left: -8px;
 }
 
 .slider-arrow::after {
-    border-left: 5px solid #000;
+    border-left: 5px solid var(--background-color);
     margin-right: -8px;
 }
 
@@ -229,7 +229,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(10, 10, 10, 0.9);
+    background-color: rgba(13, 17, 23, 0.9); /* var(--background-color) in rgba */
     border: 1px solid var(--border-color);
     padding: 8px 12px;
     border-radius: 4px;

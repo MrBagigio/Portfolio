@@ -5,11 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alessandro Giacobbi - A.P.I.S.</title>
     <meta name="description" content="Portfolio di Alessandro Giacobbi, un 3D Artist specializzato in environment e character design.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://unpkg.com;">
     <meta property="og:title" content="Alessandro Giacobbi - A.P.I.S.">
     <meta property="og:description" content="Portfolio di un 3D Artist specializzato in environment e character design.">
-    <meta property="og:image" content="assets/img/social-preview.jpg">
-    <meta property="og:url" content="https://your-domain.com">
+    <meta property="og:image" content="assets/img/Foto_profilo.jpg">
+    <meta property="og:url" content="https://alessandrogportfolio.com">
     <meta property="og:type" content="website">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Alessandro Giacobbi",
+        "jobTitle": "3D Artist",
+        "description": "3D Artist specializzato in environment e character design",
+        "url": "https://alessandrogportfolio.com",
+        "image": "assets/img/Foto_profilo.jpg",
+        "sameAs": [
+            "https://www.linkedin.com/in/alessandro-giacobbi-3d",
+            "https://www.artstation.com/alessandrog"
+        ],
+        "knowsAbout": ["3D Modeling", "Maya", "ZBrush", "Blender", "Substance Painter"]
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -20,29 +37,40 @@
     {
         "imports": {
             "three": "https://unpkg.com/three@0.142.0/build/three.module.js",
-            "three/addons/": "https://unpkg.com/three@0.142.0/examples/jsm/"
+            "three/addons/": "https://unpkg.com/three@0.142.0/examples/jsm/",
+            "EventBus": "./src/utils/events/EventBus.js",
+            "DOMService": "./src/services/dom/DOMService.js",
+            "APIService": "./src/services/api/APIService.js",
+            "ProjectService": "./src/features/projects/ProjectService.js",
+            "StateService": "./src/services/state/StateService.js",
+            "AudioManager": "./src/services/audio/AudioManager.js",
+            "Constants": "./src/utils/config/Constants.js",
+            "i18n": "./src/utils/i18n/i18n.js",
+            "MathParser": "./src/utils/math/MathParser.js"
         }
     }
     </script>
 </head>
 <body class="is-loading">
 
-    <canvas id="global-background-canvas" class="canvas-decorative"></canvas>
-    <canvas id="navbar-3d-canvas" class="canvas-navbar"></canvas>
+    <canvas id="global-background-canvas" class="canvas-decorative" aria-hidden="true"></canvas>
+    <canvas id="navbar-3d-canvas" class="canvas-navbar" aria-hidden="true"></canvas>
 
-    <audio id="coin-audio" src="assets/audio/coin-insert.mp3" preload="auto"></audio>
-    <audio id="transition-audio" src="assets/audio/vhs-static-sound.mp3" preload="auto"></audio>
-    <audio id="preloader-hover-sound" src="assets/audio/preloader-hover.mp3" preload="auto"></audio>
-    <audio id="preloader-click-sound" src="assets/audio/preloader-click.mp3" preload="auto"></audio>
-    <audio id="preloader-shutdown-sound" src="assets/audio/preloader-shutdown.mp3" preload="auto"></audio>
+    <audio id="coin-audio" src="" preload="auto"></audio>
+    <audio id="transition-audio" src="" preload="auto"></audio>
+    <audio id="preloader-hover-sound" src="" preload="auto"></audio>
+    <audio id="preloader-click-sound" src="" preload="auto"></audio>
+    <audio id="preloader-shutdown-sound" src="" preload="auto"></audio>
     
     <div id="global-score"></div>
     <div id="terminal-cursor"></div>
     <div id="terminal-aura"></div>
     
-    <canvas id="pacman-cursor-canvas" class="canvas-cursor"></canvas>
-    <canvas id="asteroids-cursor-canvas" class="canvas-cursor"></canvas>
-    <canvas id="transition-canvas" class="canvas-overlay"></canvas>
+    <canvas id="pacman-cursor-canvas" class="canvas-cursor" aria-hidden="true"></canvas>
+    <canvas id="asteroids-cursor-canvas" class="canvas-cursor" aria-hidden="true"></canvas>
+    <canvas id="simple-cursor-canvas" class="canvas-cursor" aria-hidden="true"></canvas>
+    <canvas id="glitch-cursor-canvas" class="canvas-cursor" aria-hidden="true"></canvas>
+    <canvas id="transition-canvas" class="canvas-overlay" aria-hidden="true"></canvas>
     
     <div id="page-transition-overlay"></div>
 
@@ -54,13 +82,6 @@
                 <div class="brand-line">
                     <a href="#hero" id="nav-link-HOME" class="navbar-brand nav-link" data-command-name="HOME" data-text="A.P.I.S. TERMINAL v4.0">A.P.I.S. TERMINAL v4.0</a>
                     <div id="analysis-console" class="log-console analysis-log"></div>
-                </div>
-                <div class="command-console-container">
-                    <div id="interactive-console">
-                        <span class="prompt">></span>
-                        <input type="text" id="interactive-input" class="interactive-input" spellcheck="false" autocomplete="off" placeholder="AWAITING INPUT...">
-                        <span class="cursor"></span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -98,9 +119,9 @@
 
     <main id="main-content" class="page-view active">
         <section id="hero">
-            <canvas id="hero-background-canvas" class="canvas-decorative"></canvas>
+            <canvas id="hero-background-canvas" class="canvas-decorative" aria-hidden="true"></canvas>
             <div class="hero-content reveal interactive-bounce">
-                <h1 class="glitch" data-text="CREATIVE 3D DEVELOPMENT.">CREATIVE 3D DEVELOPMENT.</h1>
+                <h1 class="glitch" data-text="3D ENVIRONMENT & CHARACTER DESIGN">3D Environment & Character Design</h1>
                 <p>Sono Alessandro Giacobbi, un 3D Artist. Esplora il mio portfolio per scoprire il processo dietro ogni creazione.</p>
             </div>
             <div class="scroll-down">
@@ -111,6 +132,9 @@
         <section id="projects">
             <div class="container">
                 <h2 class="reveal title-3d interactive-bounce">Galleria Interattiva</h2>
+                <div class="search-container">
+                    <input type="text" id="project-search" placeholder="Cerca progetti..." class="project-search">
+                </div>
                 <div class="project-grid interactive-bounce magnetic-target"></div>
             </div>
         </section>
@@ -119,8 +143,8 @@
             <div class="container">
                 <h2 class="reveal title-3d interactive-bounce">PROFILO OPERATORE</h2>
                 <div class="about-grid">
-                    <div class="about-image reveal interactive-bounce magnetic-target">
-                        <canvas id="profile-picture-canvas"></canvas>
+                    <div class="about-image reveal interactive-bounce magnetic-target" tabindex="0" role="button" aria-label="Clicca per analisi glitch della foto profilo">
+                        <canvas id="profile-picture-canvas" role="img" aria-label="Foto profilo di Alessandro Giacobbi"></canvas>
                         <div class="image-prompt">[ CLICCA PER ANALISI GLITCH ]</div>
                     </div>
                     <div class="about-text">
@@ -135,12 +159,29 @@
             </div>
         </section>
         
+        <section id="testimonials">
+            <div class="container">
+                <h2 class="reveal title-3d interactive-bounce">Testimonianze</h2>
+                <div class="testimonials-grid">
+                    <blockquote class="testimonial reveal interactive-bounce">
+                        <p>"Alessandro ha creato ambienti 3D eccezionali per il nostro progetto. La sua attenzione ai dettagli è impressionante."</p>
+                        <cite>- Cliente 1</cite>
+                    </blockquote>
+                    <blockquote class="testimonial reveal interactive-bounce">
+                        <p>"Collaborare con Alessandro è stato un piacere. Le sue competenze in character design hanno superato le aspettative."</p>
+                        <cite>- Cliente 2</cite>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+        
         <section id="contact">
             <div class="container">
                 <div class="contact-grid">
                     <div class="contact-info reveal">
                         <h2 class="interactive-bounce">Contattami</h2>
                         <p class="email-link-container"><a href="mailto:alessandro.giacobbi.3d@gmail.com" class="magnetic-target page-link interactive-bounce">La Mia EMAIL</a></p>
+                        <p class="cv-link-container"><a href="assets/cv/Alessandro_Giacobbi_CV.pdf" target="_blank" class="magnetic-target page-link interactive-bounce">Scarica CV</a></p>
                     </div>
                     <div class="contact-form reveal">
                         <h3>Il mio Toolkit</h3>
@@ -178,6 +219,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/EaselPlugin.min.js"></script>
     
     <!-- Script Principale dell'Applicazione -->
-    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="src/core/app/main.js"></script>
 </body>
 </html>
