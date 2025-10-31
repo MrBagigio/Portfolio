@@ -1,0 +1,380 @@
+/* ========================================================================== */
+/* ============= CSS: NAVBAR "CHIMERA" INTERFACE V9.6 =============== */
+/* ========================================================================== */
+
+/* -------------------------------------------------------------------------- */
+/* 1. VARIABILI E TEMA
+/* -------------------------------------------------------------------------- */
+:root {
+    --navbar-height: 90px;
+    --navbar-font-family: 'VT323', monospace;
+    
+    /* Arcade Palette - NEW */
+    --arcade-bg: var(--background-color); /* Usa variabile globale */
+    --arcade-button-bg: #1C1C1C;
+    --arcade-highlight: var(--accent-color); /* Usa variabile globale */
+    --arcade-dim-text: var(--text-color-muted); /* Usa variabile globale */
+    --arcade-decoration: #3a5f7f;
+    --arcade-log-text: var(--accent-color); /* Usa variabile globale */
+    --command-feedback-text: #FFC800; /* Giallo ambrato */
+    
+    /* Status Colors */
+    --status-warning-color: #FFC800; /* Giallo ambrato */
+    --status-critical-color: #FF3333; /* Rosso acceso */
+
+    /* LED Colors */
+    --led-power-color: #00ff00;
+    --led-hdd-color: #ff0000;
+    --led-clock-color: #00ffff;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. LAYOUT NAVBAR
+/* -------------------------------------------------------------------------- */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--navbar-height);
+    z-index: 1000;
+    display: flex;
+    align-items: stretch; /* Allunga i figli per riempire l'altezza */
+    justify-content: space-between;
+    padding: 0 15px;
+    font-family: var(--navbar-font-family);
+    
+    background-color: var(--arcade-bg);
+    background-image: 
+        radial-gradient(circle at 1px 1px, rgba(204, 225, 255, 0.1) 1px, transparent 0),
+        radial-gradient(circle at 15px 15px, rgba(204, 225, 255, 0.05) 1px, transparent 0);
+    background-size: 30px 30px;
+
+    border-bottom: 3px solid var(--arcade-decoration);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 0.5s ease, transform 0.6s ease;
+}
+
+.main-header.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.navbar-left, .navbar-center, .navbar-right {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    gap: 15px;
+}
+
+    .navbar-left { 
+        flex: 1; 
+        justify-content: center;
+    }
+.navbar-center { flex: 1 1 auto; justify-content: center; } /* Centra il contenuto */
+.navbar-right { flex: 1 1 40%; justify-content: flex-end; }
+
+/* -------------------------------------------------------------------------- */
+/* 3. ELEMENTI NAVBAR
+/* -------------------------------------------------------------------------- */
+
+/* --- Brand & Consoles Area (Left) --- */
+.brand-area {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+.brand-line {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar-brand {
+    font-size: 28px;
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+.navbar-brand:hover, .navbar-brand.is-active {
+    color: var(--arcade-highlight);
+    border-color: var(--arcade-decoration);
+    background-color: rgba(0,0,0,0.3);
+}
+
+.log-console {
+    font-size: 18px;
+    color: var(--command-feedback-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    background-color: rgba(0,0,0,0.4);
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--arcade-decoration);
+}
+
+.command-console-container {
+    background-color: #000;
+    border: 2px solid var(--arcade-decoration);
+    border-radius: 6px;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.5);
+    padding: 4px 12px;
+    max-width: 500px;
+    min-height: 38px; /* Assicura altezza costante */
+    display: flex;
+    align-items: center;
+}
+
+.interactive-console {
+    display: flex;
+    align-items: center;
+    font-family: var(--navbar-font-family);
+    font-size: 20px;
+    width: 100%;
+}
+
+.prompt { color: var(--arcade-log-text); margin-right: 8px; }
+
+.interactive-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--primary-color);
+    font-family: inherit;
+    font-size: inherit;
+    flex-grow: 1;
+    padding: 0;
+}
+.interactive-input::placeholder { color: var(--arcade-dim-text); opacity: 0.6; }
+
+.cursor {
+    width: 10px;
+    height: 20px;
+    background-color: var(--arcade-log-text);
+    animation: blink-cursor 1s steps(2, start) infinite;
+}
+@keyframes blink-cursor { to { visibility: hidden; } }
+
+/* --- Menu Centrale --- */
+.nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0 30px;
+    gap: 20px;
+    border-left: 3px solid var(--arcade-decoration);
+    border-right: 3px solid var(--arcade-decoration);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px;
+    font-size: 28px;
+    color: var(--primary-color);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background-color: var(--arcade-button-bg);
+    border: 2px solid var(--arcade-decoration);
+    border-radius: 8px;
+    box-shadow: inset 0 -6px 0px 2px rgba(0,0,0,0.4), 0 4px 6px rgba(0,0,0,0.5), inset 0 1px 0px 0px rgba(255,255,255,0.1); /* Aggiunto highlight superiore */
+    transition: all 0.15s ease-out; /* Transizione leggermente più rapida */
+    transform: translateY(0);
+    position: relative;
+    cursor: pointer;
+}
+.nav-link:hover {
+    color: var(--arcade-highlight);
+    background-color: #2a2a2a;
+    box-shadow: inset 0 -6px 0px 2px rgba(0,0,0,0.4), 0 6px 8px rgba(0,0,0,0.6), inset 0 1px 0px 0px rgba(255,255,255,0.15); /* Highlight più intenso */
+}
+.nav-link:active, .nav-link.is-active, .nav-link.is-pressed {
+    background-color: #1a1a1a; /* Colore più scuro per effetto premuto */
+    box-shadow: inset 0 -2px 0px 0px rgba(0,0,0,0.6), 0 1px 2px rgba(0,0,0,0.3), inset 0 1px 0px 0px rgba(255,255,255,0.05); /* Ombra interna più marcata */
+    transform: translateY(6px); /* Spostamento più evidente */
+    color: var(--arcade-highlight);
+    border-color: var(--arcade-highlight); /* Bordo evidenziato */
+    transition: all 0.2s ease-out; /* Transizione più fluida per i cambi di stato */
+}
+
+/* --- Display a Destra (Log, Clock) --- */
+.display-with-led {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(0,0,0,0.4);
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--arcade-decoration);
+    height: 100%;
+}
+
+.system-log {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--arcade-log-text);
+    white-space: nowrap;
+}
+
+.log-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Status Colors for Logs */
+.system-log .status-warning { color: var(--status-warning-color); }
+.system-log .status-critical { color: var(--status-critical-color); }
+
+.system-clock {
+    font-size: 24px;
+    color: var(--primary-color);
+    padding: 0 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* --- System Clock & Uptime --- */
+.system-clock {
+    font-size: 22px;
+    color: var(--led-clock-color);
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+/* --- Arcade Display Panel (HI-SCORE, CREDITS) --- */
+.arcade-display-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 10px;
+    border-left: 2px solid var(--arcade-decoration);
+}
+
+.system-display {
+    font-size: 16px;
+    color: var(--primary-color);
+    white-space: nowrap;
+}
+
+.system-display span {
+    color: var(--command-feedback-text);
+    font-weight: bold;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 4. LED INDICATORS & ANIMATIONS
+/* -------------------------------------------------------------------------- */
+.led {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: currentColor;
+    box-shadow: 0 0 10px 3px currentColor;
+    flex-shrink: 0;
+}
+
+.led-hdd { 
+    color: var(--led-hdd-color); 
+    animation: hdd-blink 1.2s infinite steps(1, end);
+}
+@keyframes hdd-blink {
+    50%, 80% { opacity: 0.3; }
+}
+
+/* -------------------------------------------------------------------------- */
+/* 5. MODIFICHE PER GLITCHY AI
+/* -------------------------------------------------------------------------- */
+
+/* Nasconde la vecchia console di input, la cui logica è ora gestita da Glitchy */
+.interactive-console {
+    display: none !important;
+}
+
+/* Aggiunge un testo segnaposto per comunicare la nuova funzionalità */
+.command-console-container::before {
+    content: "COMANDI GESTITI DA GLITCHY AI";
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    color: var(--arcade-dim-text);
+    opacity: 0.7;
+    width: 100%;
+    text-align: left;
+    padding-left: 4px; /* Aggiunge un piccolo spazio */
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        height: 70px;
+    }
+
+    .navbar-brand {
+        font-size: 24px;
+    }
+
+    .system-clock {
+        font-size: 18px;
+    }
+
+    .system-display {
+        font-size: 14px;
+    }
+
+    .log-console {
+        display: none;
+    }
+
+    .command-console-container {
+        display: none;
+    }
+
+    .arcade-display-panel {
+        display: none;
+    }
+
+    .system-clock {
+        display: none;
+    }
+
+    .led {
+        display: none;
+    }
+
+    .display-with-led {
+        display: none;
+    }
+
+    .log-console {
+        font-size: 16px;
+    }
+
+    .interactive-console {
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .command-console-container {
+        display: none;
+    }
+
+    .arcade-display-panel {
+        display: none;
+    }
+}

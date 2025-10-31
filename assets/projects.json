@@ -1,0 +1,26 @@
+[
+  {
+    "id": "biosphaera",
+    "title": "Biosphaera",
+    "poster": "",
+    "videos": {
+      "before": { "mp4": "" },
+      "after": { "mp4": "" }
+    },
+    "fileSize": "142 MB",
+    "date": "24.07.2023",
+    "tools": ["Maya", "ZBrush", "Substance Painter"]
+  },
+  {
+    "id": "lp",
+    "title": "LP Project",
+    "poster": "assets/projects_assets/Lp/Lp_THB.jpg",
+    "videos": {
+      "before": { "mp4": "assets/projects_assets/Lp/Lp_Before_Video.mp4" },
+      "after": { "mp4": "assets/projects_assets/Lp/Lp_After_Video.mp4" }
+    },
+    "fileSize": "89 MB",
+    "date": "15.03.2023",
+    "tools": ["Blender", "Substance Painter"]
+  }
+]

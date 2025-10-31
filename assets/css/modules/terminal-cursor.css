@@ -1,0 +1,74 @@
+/* ==========================================================================
+   CSS: Terminal Cursor (Versione Pulita e Finale)
+   ========================================================================== */
+
+/* Nasconde il cursore di default quando il cursore terminale è attivo. */
+html, body, a, button {
+    cursor: none;
+}
+
+/* Hide cursor on mobile devices */
+@media (max-width: 767px) {
+    html, body, a, button {
+        cursor: auto;
+    }
+    
+    #terminal-cursor, #terminal-aura {
+        display: none !important;
+    }
+}
+
+#terminal-cursor, #terminal-aura {
+    display: block; /* Sempre block, l'opacità controlla la visibilità */
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+    z-index: 40000; 
+    opacity: 0; /* Inizia invisibile */
+    transition: opacity 0.18s ease-out, transform 0.2s ease-out;
+}
+
+#terminal-cursor {
+    width: 8px;
+    height: 8px;
+    background-color: #39ff14;
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.9), 0 0 18px rgba(57, 255, 20, 0.45);
+    animation: crtPulse 1.2s ease-in-out infinite;
+}
+
+#terminal-aura {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #39ff14;
+    box-shadow: 0 0 10px #39ff14, inset 0 0 10px #39ff14;
+    z-index: 39999; /* Appena sotto il punto centrale */
+}
+
+/* Stile per l'interazione */
+#terminal-cursor.cursor-hover {
+    transform: translate(-50%, -50%) scale(1.5);
+}
+
+#terminal-aura.cursor-hover {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+}
+
+/* When preloader is active, allow the terminal cursor to appear above it */
+body.is-loading #terminal-cursor {
+    z-index: 40001; /* above the preloader */
+}
+
+body.is-loading #terminal-aura {
+    z-index: 40000; /* just behind il punto centrale */
+}
+
+
+@keyframes crtPulse {
+    0%, 100% { box-shadow: 0 0 6px rgba(57, 255, 20, 0.75), 0 0 14px rgba(57, 255, 20, 0.4); }
+    50% { box-shadow: 0 0 10px rgba(57, 255, 20, 1), 0 0 22px rgba(57, 255, 20, 0.6); }
+}

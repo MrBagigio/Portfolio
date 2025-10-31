@@ -1,0 +1,82 @@
+/* assets/css/modules/glitch-cursor.css */
+
+/* ==========================================================================
+   Stili per il Cursore Glitch (Matrix Rain)
+   ========================================================================== */
+
+#glitch-cursor-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Il gioco non richiede click diretti sul canvas */
+
+    /* --- MODIFICA: Mettiamo il canvas sopra la navbar --- */
+    /* Deve stare sopra la navbar (1000) ma sotto la UI interattiva. */
+    z-index: 1100;
+
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Aggiungi questa classe al body quando il cursore è attivo */
+body.js-glitch-cursor-active #glitch-cursor-canvas {
+    opacity: 1;
+}
+
+/* Nascondi il cursore predefinito quando il nostro è attivo */
+body.js-glitch-cursor-active,
+body.js-glitch-cursor-active a,
+body.js-glitch-cursor-active button {
+    cursor: none;
+}
+
+/* Hide cursor on mobile devices */
+@media (max-width: 767px) {
+    #glitch-cursor-canvas {
+        display: none !important;
+    }
+    
+    body.js-glitch-cursor-active,
+    body.js-glitch-cursor-active a,
+    body.js-glitch-cursor-active button {
+        cursor: auto;
+    }
+}
+
+/* Effetto glitch aggiuntivo sul testo quando il cursore è attivo */
+body.js-glitch-cursor-active * {
+    text-shadow: 0 0 5px rgba(57, 255, 20, 0.3);
+}
+
+/* Effetto magnetico per elementi target */
+.is-magnet-locked {
+    position: relative;
+}
+
+.is-magnet-locked::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg,
+        transparent,
+        rgba(57, 255, 20, 0.3),
+        transparent,
+        rgba(57, 255, 20, 0.3),
+        transparent
+    );
+    background-size: 400% 400%;
+    animation: glitch-border 2s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes glitch-border {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}

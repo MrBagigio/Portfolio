@@ -1,0 +1,9 @@
+/* ==========================================================================
+   MODULE: Tutorial Terminal (Compat layer)
+   ========================================================================= */
+/* Gli stili del cursore sono definiti in terminal-cursor.css. */
+
+body.is-loading #main-header,
+body.is-loading #main-content {
+    display: none; /* Nascondi il contenuto mentre il preloader è attivo */
+}

@@ -1,0 +1,68 @@
+/* assets/css/modules/asteroids-cursor.css */
+
+#asteroids-cursor-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh;
+    
+    /* --- MODIFICA CHIAVE: Rende il canvas "trasparente" ai click di default --- */
+    /* Questo rimuove il "muro invisibile" e rende la pagina di nuovo cliccabile. */
+    pointer-events: none; 
+    
+    z-index: 11010; /* Cursor layer: grouped with other cursors */
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+body.custom-cursor-active #asteroids-cursor-canvas {
+    opacity: 1;
+}
+
+body.custom-cursor-active,
+body.custom-cursor-active a,
+body.custom-cursor-active button {
+    cursor: none;
+}
+
+/* Hide cursor on mobile devices */
+@media (max-width: 767px) {
+    #asteroids-cursor-canvas {
+        display: none !important;
+    }
+    
+    body.custom-cursor-active,
+    body.custom-cursor-active a,
+    body.custom-cursor-active button {
+        cursor: auto;
+    }
+}
+
+#global-score {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    border-radius: 4px;
+    z-index: 10005;
+    user-select: none;
+    pointer-events: none;
+    
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#global-score.score-visible {
+    visibility: visible;
+    opacity: 1;
+}
